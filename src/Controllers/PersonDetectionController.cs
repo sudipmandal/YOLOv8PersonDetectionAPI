@@ -17,6 +17,7 @@ namespace YoloPersonDetectionAPI.Controllers
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> Post([FromBody] ImageRequest request)
         {
             try
