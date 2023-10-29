@@ -74,7 +74,7 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: latest
+          tags: ${{ env.IMAGE_NAME }}:latest
           no-cache: true
           platforms: linux/amd64
 
@@ -87,7 +87,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-          TAGS: latest
+          TAGS: ${{ env.IMAGE_NAME }}:latest
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
