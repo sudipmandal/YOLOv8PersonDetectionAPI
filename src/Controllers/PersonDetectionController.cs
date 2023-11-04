@@ -22,9 +22,21 @@ namespace YoloPersonDetectionAPI.Controllers
         {
             try
             {
-                byte[] imageBytes = Convert.FromBase64String(request.Base64Image);
-                PersonDetector detector = new PersonDetector(_logger);
-                var humanCount = await detector.GetHumansInImage(imageBytes);
+                _logger.LogInformation("Endpoint Called");
+
+                int humanCount = 0;
+
+                if(request != null && !string.IsNullOrEmpty(request.Base64Image))
+                {
+                    byte[] imageBytes = Convert.FromBase64String(request.Base64Image);
+                    PersonDetector detector = new PersonDetector(_logger);
+                    humanCount = await detector.GetHumansInImage(imageBytes);
+                    _logger.LogInformation($"Person found = {humanCount}");
+                    
+                }
+                else
+                    _logger.LogWarning("Bad Request, No image data received");
+
                 return Ok(new { NumberOfHumans = humanCount });
 
             }
