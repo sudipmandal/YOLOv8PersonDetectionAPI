@@ -1,4 +1,5 @@
 ﻿using Compunet.YoloV8;
+using YoloPersonDetectionAPI.Models;
 
 namespace YoloPersonDetectionAPI.Detectors
 {
@@ -20,8 +21,8 @@ namespace YoloPersonDetectionAPI.Detectors
                 foreach (var item in result.Boxes)
                     logger.LogInformation($"Detected -> {item.Class.Name} with Confidence {item.Confidence}");
 #endif
-
-                int r = result.Boxes.Where(x => x.Class.Name.ToLower() == "person" && x.Confidence > 0.5).Count();
+                float thresholdConfidence = float.Parse(Environment.GetEnvironmentVariable(Constants.SENSITIVITY) ?? Defaults.GetDefault(Constants.SENSITIVITY));
+                int r = result.Boxes.Where(x => x.Class.Name.ToLower() == "person" && x.Confidence > thresholdConfidence).Count();
                 return r;
             }
         }

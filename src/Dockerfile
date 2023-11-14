@@ -16,6 +16,9 @@ FROM build AS publish
 RUN dotnet publish "YoloPersonDetectionAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+
+ENV SENSITIVITY # (default 0.5) Set the person detection confidence of api,valid values between 0.1-1 where 0.1 = low and 1 = high
+
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "YoloPersonDetectionAPI.dll"]
