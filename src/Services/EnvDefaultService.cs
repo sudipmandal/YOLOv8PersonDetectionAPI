@@ -17,10 +17,12 @@ namespace YoloPersonDetectionAPI.Services
         {
             if (String.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(envVar)))
             {
-                _logger.LogInformation($"Env var ${envVar} is not set, using default {defaultVal}");
+                _logger.LogInformation($"{envVar} is not set, using default {defaultVal}");
                 Environment.SetEnvironmentVariable(envVar, defaultVal);
             }
-                
+            else
+                _logger.LogInformation($"{envVar} = {Environment.GetEnvironmentVariable(envVar)}");
+
 
             switch (type)
             {
@@ -29,14 +31,14 @@ namespace YoloPersonDetectionAPI.Services
                 case VARTYPE.Numeric:
                     if(!Decimal.TryParse(Environment.GetEnvironmentVariable(envVar),out var decimalVal))
                     {
-                        _logger.LogInformation($"Env var ${envVar} is not valid num, using default {defaultVal}");
+                        _logger.LogInformation($"{envVar} is not valid num, using default {defaultVal}");
                         Environment.SetEnvironmentVariable(envVar, defaultVal);
                     }
                     break;
                 case VARTYPE.Bool:
                     if(!Boolean.TryParse(Environment.GetEnvironmentVariable(envVar),out var boolVal))
                     {
-                        _logger.LogInformation($"Env var ${envVar} is not valid bool, using default {defaultVal}");
+                        _logger.LogInformation($"{envVar} is not valid bool, using default {defaultVal}");
                         Environment.SetEnvironmentVariable(envVar, defaultVal);
                     }
                     break;
