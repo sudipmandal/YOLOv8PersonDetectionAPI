@@ -12,6 +12,7 @@ namespace YoloPersonDetectionAPI
 
             builder.Services.AddControllers();
             builder.Services.AddHostedService<EnvDefaultService>();
+            builder.Services.AddHostedService<LocalCacheService>();
 
             var app = builder.Build();
 
