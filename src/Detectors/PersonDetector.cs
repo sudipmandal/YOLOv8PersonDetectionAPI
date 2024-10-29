@@ -15,11 +15,11 @@ namespace YoloPersonDetectionAPI.Detectors
             var result = await LocalCache.predictor.DetectAsync(imgData);
 
 #if DEBUG
-            foreach (var item in result.Boxes)
-                logger.LogInformation($"Detected -> {item.Class.Name} with Confidence {item.Confidence}");
+            foreach (var item in result)
+                logger.LogInformation($"Detected -> {item.Name.Name} with Confidence {item.Confidence}");
 #endif
-            float thresholdConfidence = float.Parse(Environment.GetEnvironmentVariable(Constants.SENSITIVITY) ?? Defaults.GetDefault(Constants.SENSITIVITY));
-            int r = result.Boxes.Where(x => x.Class.Name.ToLower() == "person" && x.Confidence > thresholdConfidence).Count();
+            var thresholdConfidence = float.Parse(Environment.GetEnvironmentVariable(Constants.SENSITIVITY) ?? Defaults.GetDefault(Constants.SENSITIVITY));
+            int r = result.Count(x => x.Name.Name.ToLower() == "person" && x.Confidence > thresholdConfidence);
             return r;
         }
     }

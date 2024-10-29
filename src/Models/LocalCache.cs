@@ -4,6 +4,6 @@ namespace YoloPersonDetectionAPI.Models
 {
     public static class LocalCache
     {
-        public static YoloV8 predictor;
+        public static YoloPredictor predictor;
     }
 }

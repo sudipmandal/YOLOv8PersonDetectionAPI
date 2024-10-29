@@ -1,4 +1,4 @@
-﻿namespace YoloPersonDetectionAPI.Models
+namespace YoloPersonDetectionAPI.Models
 {
     public class ImageRequest
     {

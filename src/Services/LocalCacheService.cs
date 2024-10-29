@@ -7,7 +7,7 @@ namespace YoloPersonDetectionAPI.Services
     {
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            LocalCache.predictor = new YoloV8("Assets/yolov8s.onnx");
+            LocalCache.predictor = new YoloPredictor("Assets/yolov8n-uint8.onnx");
             return Task.CompletedTask;
         }
 
