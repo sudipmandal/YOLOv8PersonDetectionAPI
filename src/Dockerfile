@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["YoloPersonDetectionAPI.csproj", "."]
 RUN dotnet restore "./YoloPersonDetectionAPI.csproj"
